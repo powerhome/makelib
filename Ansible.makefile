@@ -1,0 +1,48 @@
+define __ansible_decrypt
+	ansible-vault decrypt $(1)
+endef
+
+define __ansible_encrypt
+	ansible-vault encrypt $(1)
+endef
+
+# Decrypt secrets file if not decrypted
+define ansible_decrypt
+	$(if $(shell head -1 $(1) | grep '$ANSIBLE_VAULT;'),$(call __ansible_decrypt,$(1)),$())
+endef
+
+# Encrypt secrets file if not encrypted
+define ansible_encrypt
+	$(if $(shell head -1 $(1) | grep '$ANSIBLE_VAULT;'),$(),$(call __ansible_encrypt,$(1)))
+endef
+
+# Set ansible flag if variable == 'yes'
+define set_ansible_flag_if_yes
+	$(if $(shell echo $(2) | grep -w 'yes'),$(shell echo $(1)),$())
+endef
+
+# Set ansible flag if variable != 'yes'
+define set_ansible_flag_if_not_yes
+	$(if $(shell echo $(2) | grep -w 'yes'),$(),$(shell echo $(1)))
+endef
+
+# Set ansible key/value flag if a variable is set
+define set_ansible_key_value_flag
+	$(if $(shell echo $(2)),$(shell echo $(1) $(2)),$())
+endef
+
+# Set ansible --extra-vars flag(s)
+define set_ansible_extra_vars
+	$(strip $(foreach 1,$1, $(shell echo --extra-vars $1)))
+endef
+
+# Construct a string of arguments to be passed to ansible
+define construct_ansible_args
+$(strip -i hosts \
+$(call set_ansible_flag_if_not_yes,--check,$(ansible_apply)) \
+$(call set_ansible_flag_if_yes,-vvvv,$(ansible_debug)) \
+$(call set_ansible_flag_if_yes,-K,$(ansible_ask_pass)) \
+$(call set_ansible_key_value_flag,--key-file,$(ansible_ssh_key)) \
+$(call set_ansible_key_value_flag,-u,$(ansible_ssh_user)) \
+$(call set_ansible_extra_vars,$(ansible_extra_vars)))
+endef
