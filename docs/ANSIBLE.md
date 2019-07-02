@@ -49,7 +49,6 @@ The following is an example configuration that resides in `~/.ansible.cfg`:
 
 ```ini
 [defaults]
-vault_password_file = vaultpass
 python_interpreter = /usr/bin/env python3
 remote_user = root
 
