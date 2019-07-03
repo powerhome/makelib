@@ -1,9 +1,13 @@
 define __ansible_decrypt
-	ansible-vault decrypt $(1)
+	ansible-vault \
+	$(call __ansible_set_key_value_flag,--vault-password-file,$(ansible_vault_passfile)) \
+	decrypt $(1)
 endef
 
 define __ansible_encrypt
-	ansible-vault encrypt $(1)
+	ansible-vault \
+	$(call __ansible_set_key_value_flag,--vault-password-file,$(ansible_vault_passfile)) \
+	encrypt $(1)
 endef
 
 # Decrypt secrets file if not decrypted
