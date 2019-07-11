@@ -43,6 +43,7 @@ endef
 # Construct a string of arguments to be passed to ansible
 define ansible_construct_args
 $(strip \
+$(call __ansible_set_key_value_flag,-i,$(ansible_inventory))
 $(call __ansible_set_flag_if_not_yes,--check,$(ansible_apply)) \
 $(call __ansible_set_flag_if_yes,-vvvv,$(ansible_debug)) \
 $(call __ansible_set_flag_if_yes,-K,$(ansible_ask_pass)) \
