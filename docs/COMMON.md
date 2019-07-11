@@ -9,11 +9,11 @@ state=
 
 check:
   # Make sure certain executables are available
-  $(call required_bin,app helmfile example)
+  $(call bin_required,app helmfile example)
 
   # Make sure required variables are set
-  $(call required_var,host,You must specify the host variable)
-  $(call required_var,state,You must specify the state variable)
+  $(call var_required,host,You must specify the host variable)
+  $(call var_required,state,You must specify the state variable)
 
 modify_host_state:
   example modify_host host=$(host) state=$(state)
