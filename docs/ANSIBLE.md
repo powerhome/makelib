@@ -7,7 +7,7 @@ This is a collection of helper methods used when writing Ansible oriented Makefi
 include github.com/powerhome/makelib/Common.makefile
 include github.com/powerhome/makelib/Ansible.makefile
 
-# NOTE: All variables shown below should be explicitly defined in your Makefile
+# NOTE: Variables show below are optional and do not have to be explicitly defined
 
 # The target host name as defined in your inventory
 ansible_host=
@@ -23,6 +23,8 @@ ansible_ssh_user=
 ansible_ssh_key=
 # Any additional --extra-vars params, space separated
 ansible_extra_vars=host=$(ansible_host) @common/secrets.yaml
+# Specify an inventory file
+ansible_inventory=hosts/APP-Dev
 
 # NOTE: Construct an argument string to pass to ansible
 ansible_args=$(call ansible_construct_args)
