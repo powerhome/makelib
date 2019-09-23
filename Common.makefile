@@ -34,5 +34,5 @@ endef
 #
 # EXAMPLE: $(call file_required,file_path)
 define file_required
-	$(if $(shell test ! -f $1),$(error Directory "$1" does not exist),)
+	$(if $(shell test ! -f $1),$(error File "$1" does not exist),)
 endef
