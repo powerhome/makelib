@@ -15,6 +15,14 @@ check:
   $(call var_required,host,You must specify the host variable)
   $(call var_required,state,You must specify the state variable)
 
+  # Make sure a directory exists (can be relative or absolute)
+  $(call dir_required,my/required/path)
+  $(call dir_required,/my/absolute/path)
+
+  # Make sure a file exists (can be relative or absolute)
+  $(call file_required,my/relative/file.yaml)
+  $(call file_required,/my/absolute/file.yaml)
+
 modify_host_state:
   example modify_host host=$(host) state=$(state)
 
