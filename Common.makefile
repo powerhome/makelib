@@ -27,12 +27,12 @@ endef
 #
 # EXAMPLE: $(call dir_required,directory_path)
 define dir_required
-	$(if $(shell test ! -d $1),$(error Directory "$1" does not exist),)
+	$(if $(shell ls -d $1),,$(error Directory "$1" does not exist))
 endef
 
 # Require a file exists
 #
 # EXAMPLE: $(call file_required,file_path)
 define file_required
-	$(if $(shell test ! -f $1),$(error File "$1" does not exist),)
+	$(if $(shell find $1 -type f),,$(error File "$1" does not exist))
 endef
