@@ -26,6 +26,6 @@ endef
 # Construct a string of arguments to be passed to terraform
 define terraform_construct_args
 $(strip \
-$(call __terraform_set_key_value_flag,-target,$(terraform_target)) \
+$(call __terraform_set_key_eq_flag,-target,$(terraform_target)) \
 -var-file=../../terraform.tfvars)
 endef
