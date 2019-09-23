@@ -21,3 +21,12 @@ define var_required
 	$(strip $(foreach 1,$1, \
 		$(call __check_defined,$1,$(strip $(value 2)))))
 endef
+
+
+# Require a directory exists
+#
+# EXAMPLE: $(call dir_required,directory_path)
+define dir_required
+	$(if $(shell ls $1),, \
+		$(error Directory "$1" does not exist))
+endef
