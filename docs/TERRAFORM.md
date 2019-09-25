@@ -20,11 +20,6 @@ terraform_args=$(call terraform_construct_args)
 check:
 	$(call bin_required,terraform)
 
-	# Check for required Terraform environment variables
-	$(call var_required,TF_VAR_provisioning_password,You must provide a provisioning password)
-	$(call var_required,VSPHERE_USER,You must provide your vSphere username)
-	$(call var_required,VSPHERE_PASSWORD,You must provide your vSphere password)
-
 	# Must specify which directory of Terraform configs to target
 	$(call var_required,terraform_project,You must specify which project to manage)
 
