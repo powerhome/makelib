@@ -27,6 +27,5 @@ endef
 define terraform_construct_args
 $(strip \
 $(call __terraform_set_key_eq_flag,-target,$(terraform_target)) \
-$(call __terraform_set_extra_vars,$(terraform_extra_vars)) \
--var-file=../../terraform.tfvars)
+$(call __terraform_set_extra_vars,$(terraform_extra_vars)))
 endef
