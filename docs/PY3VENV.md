@@ -4,6 +4,9 @@ This is a collection of helper methods used when writing Makefiles that need a P
 ```Makefile
 include github.com/powerhome/makelib/Py3venv.makefile
 
+# Automatically install requirements file
+python3_requirements=requirements.txt
+
 # Define custom executable paths
 ansible_playbook=$(venv)/bin/ansible-playbook
 
