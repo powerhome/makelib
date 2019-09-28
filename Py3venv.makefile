@@ -1,4 +1,4 @@
-include Common.makefile
+include github.com/powerhome/makelib/Common.makefile
 
 venv=venv
 __stderr=&> /dev/stderr
